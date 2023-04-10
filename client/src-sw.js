@@ -28,27 +28,14 @@ registerRoute(({ request }) => request.mode === "navigate", pageCache);
 
 // TODO: Implement asset caching
 
-// this.addEventListener("install", (event) => {
-//   event.waitUntil(
-//     caches.open("page-cache").then((cache) => cache.add("/index.html"))
-//   );
-// });
-
-// window.addEventListener("load", () => {
-//   navigator.serviceWorker.register("/src-sw.js");
-// });
-
-const urlsToCache = [
-  "/",
-  "index.html",
-  "main.bundle.js",
-  "install.bundle.js",
-  "main.css",
-  "/icons",
-];
-self.addEventListener("install", (event) => {
-  event.waitUntil(async () => {
-    const cache = await caches.open("page-cache");
-    return cache.addAll(urlsToCache);
-  });
-});
+registerRoute(
+  ({ request }) => ["style", "script", "worker"].includes(request.destination),
+  new StaleWhileRevalidate({
+    cacheName: "asset-cache",
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
+);
