@@ -29,11 +29,12 @@ module.exports = () => {
         swDest: "src-sw.js",
       }),
       new WebpackPwaManifest({
+        fingerprints: false,
         short_name: "JATE",
         name: "JATE",
         icons: [
           {
-            src: path.resolve("src/images/logo.png"),
+            src: path.resolve("./src/images/logo.png"),
             type: "image/png",
             sizes: [96, 128, 256, 512],
             destination: path.join("assets", "icons"),
