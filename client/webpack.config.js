@@ -29,8 +29,8 @@ module.exports = () => {
         swDest: "src-sw.js",
       }),
       new WebpackPwaManifest({
-        short_name: "Activity 28",
-        name: "Activity 28",
+        short_name: "JATE",
+        name: "JATE",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
@@ -43,7 +43,7 @@ module.exports = () => {
         display: "standalone",
         start_url: "./",
         publicPath: "./",
-        description: "Student mini project for 19",
+        description: "Just another text editor",
         background_color: "#7eb4e2",
         theme_color: "#7eb4e2",
       }),
